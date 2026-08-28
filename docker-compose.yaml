@@ -1,0 +1,47 @@
+name: springboot-thymeleaf-example-cluster
+
+volumes:
+  cms_pgsql-data:
+  cms_redis-data:
+
+networks:
+  springboot-thymeleaf-example-network:
+
+services: 
+  cms_postgresql:
+    image: postgres:18-trixie
+    container_name: cms_postgresql
+    restart: always
+    environment:
+      POSTGRES_DB: "${CMS_PGSQL_DB:-cms-db}"
+      POSTGRES_USER: "${CMS_PGSQL_DB_USER:-cms-db-user}"
+      POSTGRES_PASSWORD: "${CMS_PGSQL_DB_PASSWORD:-cms-db-password}"
+    volumes:
+      - cms_pgsql-data:/var/lib/postgresql
+      - ./docker/postgresql-initdb.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    ports:
+      - "${CMS_PGSQL_DB_PORT:-5432}:5432"
+    networks:
+      - springboot-thymeleaf-example-network
+  cms_redis:
+    image: redis:alpine
+    container_name: cms_redis
+    restart: always
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - cms_redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - springboot-thymeleaf-example-network

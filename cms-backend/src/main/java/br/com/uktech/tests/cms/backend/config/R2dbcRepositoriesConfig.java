@@ -10,9 +10,16 @@ package br.com.uktech.tests.cms.backend.config;
  * permission, please contact the copyright holders and delete this file.
  */
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
+
 /**
  * @created at 27/08/2026
  * @author Carlos Alberto Cipriano Korovsky <carlos.korovsky@uktech.com.br>
  */
+@Configuration
+@EnableR2dbcRepositories
+@EnableR2dbcAuditing
 public class R2dbcRepositoriesConfig {
 }

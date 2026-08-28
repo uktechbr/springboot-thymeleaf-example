@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20260827-01-create-pages" author="carlos.korovsky">
+        <createTable tableName="pages">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meta_description" type="VARCHAR(500)"/>
+            <column name="content" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <!-- Seed data for the home page -->
+        <insert tableName="pages">
+            <column name="slug" value="home"/>
+            <column name="title" value="Welcome to Reactive CMS"/>
+            <column name="meta_description" value="Home page managed by reactive CMS with Spring WebFlux and Redis"/>
+            <column name="content" value="&lt;h1 class='display-4 fw-bold text-primary'&gt;Hello, Reactive World!&lt;/h1&gt;&lt;p class='lead'&gt;This content is dynamically served from the database with Redis caching and high performance.&lt;/p&gt;"/>
+            <column name="created_at" valueDate="2026-08-27T00:00:00"/>
+            <column name="updated_at" valueDate="2026-08-27T00:00:00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

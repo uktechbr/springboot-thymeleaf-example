@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${page != null ? page.title : 'CMS - Início'}">CMS Home</title>
+    <meta name="description" th:content="${page != null ? page.metaDescription : 'CMS Reativo com Spring Boot e Thymeleaf'}">
 
+    <!-- Simple CDN CSS for modern styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}">UK Tech CMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Dynamic Menu Items rendered from backend -->
+                <li class="nav-item" th:each="menuPage : ${menuPages}">
+                    <a class="nav-link"
+                       th:href="${menuPage.slug == 'home' ? '/' : '/' + menuPage.slug}"
+                       th:text="${menuPage.title}"
+                       th:classappend="${page != null and page.slug == menuPage.slug} ? 'active' : ''">
+                        Title
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <!-- Success Alert -->
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        Lead cadastrado com sucesso! Entraremos em contato em breve.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Error Alert -->
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Ocorreu um erro ao cadastrar o lead. Tente novamente mais tarde.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Main Dynamic Content rendered from CMS Backend & Redis Cache -->
+    <div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+        <div class="container-fluid py-2">
+            <!-- Using th:utext to render HTML tags stored in the database -->
+            <div th:utext="${page != null ? page.content : '<h1>Página não encontrada</h1>'}"></div>
+        </div>
+    </div>
+
+    <!-- Lead Capture Form Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-3 text-center">Cadastre-se na nossa Lista</h3>
+                    <form th:action="@{/leads}" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail Corporativo</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Enviar Contato</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

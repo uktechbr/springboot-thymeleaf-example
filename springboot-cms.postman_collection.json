@@ -1,0 +1,181 @@
+{
+    "info": {
+        "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Spring Boot - Thymeleaf - Example - Backend API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Pages",
+            "item": [
+                {
+                    "name": "Get All Pages (Menu)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8081/api/cms/pages",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8081",
+                            "path": [
+                                "api",
+                                "cms",
+                                "pages"
+                            ]
+                        },
+                        "description": "Retrieves all pages stored in the database (used for the frontend navigation bar)."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Page By Slug",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8081/api/cms/pages/home",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8081",
+                            "path": [
+                                "api",
+                                "cms",
+                                "pages",
+                                "home"
+                            ]
+                        },
+                        "description": "Fetches a specific page by its unique slug (e.g., 'home')."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Page",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"slug\": \"about-us\",\n    \"title\": \"About Our Company\",\n    \"metaDescription\": \"Learn more about UK Tech and our reactive solutions.\",\n    \"content\": \"<h1>About Us</h1><p>We specialize in reactive architectures with Spring Boot and WebFlux.</p>\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8081/api/cms/pages",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8081",
+                            "path": [
+                                "api",
+                                "cms",
+                                "pages"
+                            ]
+                        },
+                        "description": "Creates a new page in the CMS backend."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Page",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"slug\": \"about-us\",\n    \"title\": \"About UK Tech - Updated\",\n    \"metaDescription\": \"Updated meta description for SEO optimization.\",\n    \"content\": \"<h1>About Us (Updated)</h1><p>High performance reactive systems for modern web applications.</p>\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8081/api/cms/pages/2",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8081",
+                            "path": [
+                                "api",
+                                "cms",
+                                "pages",
+                                "2"
+                            ]
+                        },
+                        "description": "Updates an existing page by its ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Page",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8081/api/cms/pages/2",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8081",
+                            "path": [
+                                "api",
+                                "cms",
+                                "pages",
+                                "2"
+                            ]
+                        },
+                        "description": "Deletes a page by its ID."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Leads",
+            "item": [
+                {
+                    "name": "Create Lead",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Carlos Korovsky\",\n    \"email\": \"carlos.korovsky@uktech.com.br\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8081/api/cms/leads",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8081",
+                            "path": [
+                                "api",
+                                "cms",
+                                "leads"
+                            ]
+                        },
+                        "description": "Submits a new lead directly to the backend."
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

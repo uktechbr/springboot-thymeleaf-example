@@ -1,3 +1,30 @@
 spring:
   application:
     name: cms-backend
+  config:
+    # Imports the env.local file located one directory level above the project root (optional)
+    import: "optional:file:../.env[.properties]"
+  # R2DBC Configuration for Reactive Database Access
+  r2dbc:
+    url: r2dbc:postgresql://${CMS_PGSQL_DB_HOST:localhost}:${CMS_PGSQL_DB_PORT:5432}/${CMS_PGSQL_DB:cms-db}
+    username: ${CMS_PGSQL_DB_USER:cms-db-user}
+    password: ${CMS_PGSQL_DB_PASSWORD:cms-db-password}
+  # Liquibase XML Migrations Configuration
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    url: jdbc:postgresql://${CMS_PGSQL_DB_HOST:localhost}:${CMS_PGSQL_DB_PORT:5432}/${CMS_PGSQL_DB:cms-db}
+    user: ${CMS_PGSQL_DB_USER:cms-db-user}
+    password: ${CMS_PGSQL_DB_PASSWORD:cms-db-password}
+    default-schema: public
+
+server:
+  port: ${CMS_BACKEND_PORT:8081}
+
+logging:
+  level:
+    br.com.uktech.tests.cms: DEBUG
+    org.liquibase: DEBUG
+    org.springframework.data.r2dbc: DEBUG
+    org.springframework.boot.autoconfigure.liquibase: DEBUG
+    io.r2dbc.postgresql: DEBUG

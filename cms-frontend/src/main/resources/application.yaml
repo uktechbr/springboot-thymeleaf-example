@@ -1,3 +1,19 @@
 spring:
   application:
     name: cms-frontend
+  config:
+    # Imports the env.local file located one directory level above the project root (optional)
+    import: "optional:file:../.env[.properties]"
+  # Reactive Redis Cache Configuration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:-6379}
+
+server:
+  port: ${CMS_FRONTEND_PORT:8080}
+
+# Custom properties to communicate with the CMS Backend API
+backend:
+  api:
+    base-url: http://${CMS_BACKEND_HOST:localhost}:${CMS_BACKEND_PORT:8081}
