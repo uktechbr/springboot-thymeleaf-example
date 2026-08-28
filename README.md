@@ -1,4 +1,4 @@
-# Spring Boot Thymeleaf Example (UK Tech CMS)
+# Spring Boot Thymeleaf Example
 
 A modern, reactive Content Management System built with **Spring Boot 4.1.1**, **Spring WebFlux**, **Thymeleaf**, and enterprise-grade infrastructure.
 
@@ -35,7 +35,7 @@ This project follows a decoupled architecture split into two main applications:
 The easiest way to run the entire infrastructure and applications without manual setup is using Docker Compose.
 
 1. Ensure you have Docker and Docker Compose installed.
-2. Open your terminal at the root of the project where the `docker-compose.yml` file is located.
+2. Open your terminal at the root of the project where the `docker-compose.yaml` file is located.
 3. Run the following command to start all containers in the background:
    ```bash
    docker compose up -d
@@ -48,7 +48,7 @@ The easiest way to run the entire infrastructure and applications without manual
 
 ---
 
-## Running Manually (For Dummies / Local Development)
+## Running Manually (Local Development)
 
 If you prefer running the applications manually via your IDE or terminal:
 
@@ -93,6 +93,23 @@ Make sure PostgreSQL and Redis are running locally (or via Docker).
 
 ---
 
+## API Documentation & Postman Collection
+
+To make it easy to test and interact with the backend REST API (`cms-backend`), a ready-to-use Postman collection has been provided.
+
+### Endpoints Overview
+The collection covers the main resource categories:
+- **Pages:** Retrieve navigation menus, fetch specific pages by slug (`/api/cms/pages`), create, update, and delete CMS pages.
+- **Leads:** Submit new leads directly to the backend (`/api/cms/leads`).
+
+### How to Import into Postman
+1. Locate the Postman collection JSON file in the project repository (usually inside a folder like `postman/` or the root directory).
+2. Open **Postman**.
+3. Click on **Import** in the top-left corner.
+4. Drag and drop the JSON file or select it from your machine.
+5. Once imported, ensure the backend is running (default port **8081**) and start testing the endpoints right away!
+
+---
 ## License
 
 This project is licensed under the terms of the **MIT License**.
