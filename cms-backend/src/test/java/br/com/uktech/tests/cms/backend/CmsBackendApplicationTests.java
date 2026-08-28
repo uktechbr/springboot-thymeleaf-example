@@ -1,0 +1,13 @@
+package br.com.uktech.tests.cms.backend;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class CmsBackendApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
