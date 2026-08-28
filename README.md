@@ -103,7 +103,7 @@ The collection covers the main resource categories:
 - **Leads:** Submit new leads directly to the backend (`/api/cms/leads`).
 
 ### How to Import into Postman
-1. Locate the Postman collection JSON file in the project repository (usually inside a folder like `postman/` or the root directory).
+1. Locate the Postman collection JSON file `springboot-cms.postman_collection.json` in the project root directory.
 2. Open **Postman**.
 3. Click on **Import** in the top-left corner.
 4. Drag and drop the JSON file or select it from your machine.
